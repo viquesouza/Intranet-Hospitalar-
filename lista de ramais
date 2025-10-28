@@ -1,0 +1,233 @@
+# Repositório: Lista de Ramais 
+
+
+## Estrutura de pastas
+
+```
+intranet-ramais/
+
+├── index.html
+├── README.md
+├── .gitignore
+├── css/
+│   └── style.css
+├── js/
+│   └── script.js
+└── assets/
+    └── logos/
+        ├── logo.png          <-- coloque aqui a logo genérica
+        ├── unidade-a.png     <-- imagens de cada unidade (ex: Unidade A)
+        └── ramal.png
+```
+
+---
+
+## 1) index.html
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Listagem de Ramais — Genérico</title>
+  <link rel="shortcut icon" href="assets/logos/logo.png" type="image/png" />
+
+  <!-- Estilos locais -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <header class="cabecalho">
+    <div class="container">
+      <div class="cabecalho-inner">
+        <img src="assets/logos/logo.png" alt="Logo" class="logo" />
+        <h1 class="titulo">LISTA DE RAMAIS</h1>
+      </div>
+    </div>
+  </header>
+
+  <!-- Área principal com fundo e blocos -->
+  <main class="area-principal">
+    <div class="container">
+
+      <div class="linha-blocos">
+        <!-- Bloco exemplo: copie / edite para adicionar mais unidades -->
+        <a class="bloco" href="#" aria-label="Unidade A">
+          <div class="balao">Ramais internos — Unidade A</div>
+          <img src="assets/logos/unidade-a.png" alt="Unidade A" />
+        </a>
+
+        <a class="bloco" href="#" aria-label="Unidade B">
+          <div class="balao">Ramais internos — Unidade B</div>
+          <img src="assets/logos/ramal.png" alt="Unidade B" />
+        </a>
+
+        <a class="bloco" href="#" aria-label="Unidade C">
+          <div class="balao">Ramais internos — Unidade C</div>
+          <img src="assets/logos/unidade-a.png" alt="Unidade C" />
+        </a>
+      </div>
+
+      <!-- Linha adicional -->
+      <div class="linha-blocos">
+        <a class="bloco" href="#" aria-label="Unidade D">
+          <div class="balao">Ramais internos — Unidade D</div>
+          <img src="assets/logos/ramal.png" alt="Unidade D" />
+        </a>
+
+        <a class="bloco" href="#" aria-label="Unidade E">
+          <div class="balao">Ramais internos — Unidade E</div>
+          <img src="assets/logos/unidade-a.png" alt="Unidade E" />
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé (aparece ao rolar próximo ao final) -->
+  <footer id="rodape" class="rodape">
+    <div class="container rodape-inner">
+      <img src="assets/logos/logo.png" alt="Logo" class="logo-rodape" />
+      <div class="rodape-texto">
+        <strong>Lista de ramais — setor de TI</strong>
+        <div class="atualizado">Atualizado em: Mês/Ano</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão voltar ao topo -->
+  <button id="voltarTopo" class="btn-topo" title="Voltar ao topo">↑</button>
+
+  <!-- Scripts locais -->
+  <script src="js/script.js"></script>
+</body>
+</html>
+```
+
+---
+
+## 2) css/style.css
+
+```css
+/* Reset simples */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html,body { height: 100%; font-family: Arial, Helvetica, sans-serif; }
+body { background: #e9e9e9; color: #111; }
+.container { width: 92%; max-width: 1100px; margin: 0 auto; }
+
+/* Cabeçalho */
+.cabecalho { background: #fff; padding: 18px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.cabecalho-inner { display:flex; align-items:center; gap:18px; }
+.logo { height: 56px; width: auto; }
+.titulo { color: #001274; font-size: 28px; font-weight:700; letter-spacing:1px; }
+
+/* Área principal */
+.area-principal { padding: 40px 0 160px; background-image: none; }
+.linha-blocos { display:flex; gap: 20px; justify-content:center; flex-wrap:wrap; margin-bottom: 18px; }
+
+.bloco { display:block; width: 260px; background:#fff; border-radius:12px; padding:14px; text-align:center; text-decoration:none; color:inherit; border: 2px solid #ff770e; position:relative; transition: transform .25s ease, background .25s ease, border-color .25s ease; }
+.bloco img { max-width:100%; height:120px; object-fit:contain; border-radius:8px; }
+.bloco:hover { transform: translateY(-6px) scale(1.02); background:#ff770e; border-color:#ff770e; color:#fff; }
+
+.balao { display:none; position:absolute; top:-38px; left:50%; transform:translateX(-50%); background:#001a72; color:#fff; padding:6px 12px; border-radius:10px; font-weight:600; font-size:0.9rem; }
+.bloco:hover .balao { display:block; }
+
+/* Rodapé */
+.rodape { display:none; position:fixed; bottom:0; left:0; width:100%; background:#fff; box-shadow:0 -2px 10px rgba(0,0,0,0.06); padding:12px 0; }
+.rodape-inner { display:flex; align-items:center; gap:14px; justify-content:center; }
+.logo-rodape { height:56px; }
+.rodape-texto { font-size:0.9rem; color:#333; text-align:center; }
+.atualizado { font-size:0.8rem; color:#666; }
+
+/* Botão topo */
+.btn-topo { position: fixed; bottom: 90px; right: 20px; width:44px; height:44px; border-radius:50%; border: none; background:#001274; color:#fff; cursor:pointer; display:none; font-size:18px; }
+
+/* Responsividade */
+@media (max-width: 720px) {
+  .titulo { font-size:22px; }
+  .bloco { width: 46%; }
+}
+@media (max-width: 420px) {
+  .bloco { width: 100%; }
+}
+```
+
+---
+
+## 3) js/script.js
+
+```javascript
+// Mostrar rodapé e botão topo quando o usuário estiver próximo do fim da página
+(function () {
+  const rodape = document.getElementById('rodape');
+  const btnTopo = document.getElementById('voltarTopo');
+
+  function verificarRolagem() {
+    const scrollPosition = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+
+    if (pageHeight - scrollPosition < 150) {
+      if (rodape) rodape.style.display = 'block';
+      if (btnTopo) btnTopo.style.display = 'block';
+    } else {
+      if (rodape) rodape.style.display = 'none';
+      if (btnTopo) btnTopo.style.display = 'none';
+    }
+  }
+
+  window.addEventListener('scroll', verificarRolagem);
+  window.addEventListener('resize', verificarRolagem);
+  document.addEventListener('DOMContentLoaded', verificarRolagem);
+
+  // Scroll suave ao topo
+  if (btnTopo) {
+    btnTopo.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+})();
+```
+
+---
+
+## 4) README.md (genérico)
+
+```markdown
+# Intranet de Ramais (Genérico)
+
+Projeto simples de listagem de ramais, pronto para ser adaptado por outra pessoa.
+
+## Como usar
+1. Copie os arquivos para uma pasta chamada `intranet-ramais`.
+2. Substitua as imagens em `assets/logos/` por suas imagens.
+3. Edite os textos e links nos blocos (`index.html`) para apontar para as páginas de ramais reais.
+4. Abra `index.html` no navegador.
+
+## Estrutura
+Veja a árvore de pastas inclusa no repositório.
+
+## Licença
+Use como preferir.
+```
+
+---
+
+## 5) .gitignore
+
+```gitignore
+node_modules/
+.DS_Store
+.vscode/
+
+# arquivos gerados
+*.log
+```
+
+---
+
+### Observações finais
+
+* Todos os links são relativos e não apontam para sites externos.
+* Substitua os arquivos em `assets/logos/` por imagens reais antes de compartilhar.
