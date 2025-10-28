@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Menu Sistemas</title>
+  <link rel="shortcut icon" href="assets/imagens/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ----------- ESTILO GERAL ----------- */
+    * { box-sizing: border-box; }
+    html,body { height:100%; }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+      background: url('assets/imagens/wallpaper.jpg') center/cover no-repeat fixed;
+      background-color: #dadada;
+      padding-bottom: 100px; /* espaço pro footer fixo */
+    }
+
+    /* ----------- NAVBAR FIXA ----------- */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1200;
+  background-color: rgba(248,249,250,0.98);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  height: 90px;           /* altura da navbar maior */
+  padding: 0 20px;        /* só horizontal */
+}
+
+.navbar .container {
+  height: 100%;            /* container ocupa toda a navbar */
+  display: flex;
+  align-items: center;     /* centraliza verticalmente */
+  gap: 30px;
+}
+
+.navbar-left img {
+  height: 150px;            /* aumenta a logo */
+  width: auto;
+  display: block;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  margin-left: 0px; /* ajuste para ir trazendo ao meio */
+}
+
+
+    /* centro com wrap (itens "andando") */
+ .navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* centraliza no container */
+  gap: 25px;               /* aumenta o espaçamento entre blocos */
+  margin-left: -85px;
+ }
+
+
+   .navbar-center .dropdown a {
+  color: #001274;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 6px 10px;
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.navbar-center .dropdown a:hover {
+  transform: scale(1.1);  /* zoom pra frente */
+  color: #FF770E;         /* cor no hover */
+}
+
+
+    .dropdown { position: relative; }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top:100%;
+      left: 0;
+      background: #fff;
+      min-width: 180px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      border-radius: 6px;
+      z-index: 1300;
+    }
+    .dropdown-content a {
+      display:block;
+      padding: 10px 14px;
+      color:#001274;
+      text-decoration:none;
+      font-size:0.9rem;
+    }
+    .dropdown:hover .dropdown-content { display:block; }
+
+    /* icone de email */
+    .email-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;       /* aumenta o botão */
+  height: 64px;
+  border-radius: 12px;
+  font-size: 1.5rem;
+
+  color: #001274;
+  text-decoration: none;
+
+  position: relative;   /* permite mover livremente */
+  left: -145px;
+  transition: background 0.18s, color 0.18s;
+}
+
+.email-link:hover {
+  background: rgba(255,119,14,0.06);
+  color: #FF770E;
+}
+
+
+
+.email-link .tooltip-top {
+  position: absolute;
+  top: 110%;               /* embaixo do ícone */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #001274;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  white-space: normal;       /* permite quebrar linha se precisar */
+  min-width: max-content;    /* largura mínima para caber o texto */
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  transition: opacity 0.3s;
+  z-index: 10;
+  text-align: center;        /* centraliza texto */
+}
+
+
+.email-link:hover .tooltip-top {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
+    /* MAIN: empurra o conteúdo para não ficar atrás da navbar fixa */
+    main { padding-top: 110px; /* ajuste conforme altura da navbar */ }
+
+    /* ----------- BLOCOS DE ACESSO (centrados: 3 por linha) ----------- */
+    .container { max-width:1200px; margin:0 auto; padding: 0 16px; }
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* centraliza o conjunto de blocos */
+      gap: 30px;
+      margin-top: 18px;
+    }
+
+    /* cada bloco ocupa ~1/3 e fica centralizado no container */
+    .acesso-bloco {
+      background-color: #fff;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+      flex: 0 0 calc(33.333% - 40px); /* 3 por linha */
+      max-width: 320px;
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      overflow:hidden;
+    }
+
+    .acesso-bloco img {
+      width:100%;
+      height:150px;
+      object-fit:cover;
+      display:block;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .acesso-bloco > a { color: inherit; text-decoration:none; display:flex; flex-direction:column; align-items:stretch; height:100%; }
+
+    .acesso-bloco div {
+      color: #001A72;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 14px 10px;
+    }
+
+    .acesso-bloco:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+
+    .tooltip-text {
+      visibility: hidden;
+      width: max-content;
+      max-width: 240px;
+      background-color: #001274;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: 10;
+      pointer-events: none;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+
+    .acesso-bloco:hover .tooltip-text { visibility: visible; opacity: 1; pointer-events: auto; }
+
+    /* ----------- RODAPÉ ----------- */
+   :root {
+  --cor-fundo-rodape: #15326C;
+  --cor-slogan: #ff770e;          /* cor do slogan */
+  --cor-frase-principal: #ffffff; /* cor da frase principal */
+  --cor-frase-suporte: #e6e6e6;   /* cor da frase de suporte */
+}
+
+/* SLOGAN */
+.slogan {
+  font-size: 12px;
+  font-style: italic;
+  font-weight: bold;   /* agora em negrito */
+  color: var(--cor-slogan);
+}
+
+
+.footer-unificado {
+  background: var(--cor-fundo-rodape);
+  color: #fff;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: center;
+  font-size: 13px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* LADO ESQUERDO */
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-left img {
+  height: 45px;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.slogan {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--cor-slogan);
+}
+
+.redes-sociais a {
+  color: #fff;
+  font-size: 18px;
+  margin-right: 8px;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.redes-sociais a:hover {
+  color: #FF770E;
+}
+
+/* LADO DIREITO */
+.footer-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.bloco-centro {
+  text-align: center;
+}
+
+.footer-linha1 {
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.frase-principal {
+  color: var(--cor-frase-principal);
+}
+
+.footer-linha2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.frase-suporte {
+  color: var(--cor-frase-suporte);
+}
+
+.titulo-suporte {
+  margin-right: 8px;
+  font-size: 12px;
+}
+
+/* ÍCONES DE SUPORTE */
+.icone-suporte {
+  position: relative;
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.icone-suporte:hover {
+  color: #FF770E;
+}
+
+/* TOOLTIP */
+.tooltip-top {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FF770E;
+  color: #fff;
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.icone-suporte:hover .tooltip-top {
+  opacity: 1;
+}
+
+    /* ----------- RESPONSIVO ----------- */
+    @media (max-width: 980px) {
+      .acesso-bloco { flex: 0 0 calc(50% - 30px); } /* 2 por linha em telas médias */
+      .navbar-left img { height:48px; }
+      main { padding-top: 120px; }
+    }
+
+    @media (max-width: 600px) {
+      .acesso-bloco { flex: 0 0 calc(100% - 30px); } /* 1 por linha em celular */
+      .navbar .container { padding: 12px; gap:10px; }
+      .navbar-center { gap:10px; justify-content:center; }
+      .footer-container { padding:8px; text-align:center; justify-content:center; }
+      .footer-right { align-items:center; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR FIXA -->
+  <header class="navbar">
+    <div class="container">
+      <div class="navbar-left">
+        <img src="assets/imagens/Logo - HCSC.png" alt="Hospital Casa" />
+      </div>
+
+ <div class="navbar-center">
+<div class="dropdown">
+  <a href="#"><i class="fas fa-folder"></i> Plataformas <i class="fas fa-caret-down"></i></a>
+  <div class="dropdown-content">
+  
+    <a href="https://glpi.redehospitalcasa.com.br/"><i class="fas fa-server"></i> Glpi</a>
+    <a href="https://nuvem.alterdata.com.br/"><i class="fas fa-cloud"></i> AlterData</a>
+    <a href="https://hospitalcasa.mxmwebmanager.com.br/principal/dashboard?grupo=HOSPITALCASAPRD"><i class="fas fa-file-invoice-dollar"></i> MXM</a>
+    <a href="http://datafit.net.br/bi/browse"><i class="fas fa-chart-line"></i> BI - DataFit</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <a href="#"><i class="fas fa-link"></i> Links Úteis <i class="fas fa-caret-down"></i></a>
+  <div class="dropdown-content">
+
+    <a href="index_ramais.html"><i class="fas fa-phone"></i> Lista de Ramais</a>
+    <a href="index_email.html"><i class="fas fa-envelope-open-text"></i> Lista de E-mails</a>
+    <a href="https://drive.google.com/drive/folders/1_KltcN_ZDlvzydm22c1nCl0yvdo2bGwT"><i class="fab fa-google-drive"></i> Logos e Timbrados</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <a href="#"><i class="fas fa-book"></i> Acesso do Colaborador <i class="fas fa-caret-down"></i></a>
+  <div class="dropdown-content">
+    <a href="http://192.168.5.101:8003/"><i class="fas fa-stethoscope"></i> Medical Pay</a>
+    <a href="https://escala.app/"><i class="fas fa-calendar-alt"></i> Escala Jornadas</a>
+    <a href="https://api.whatsapp.com/send/?phone=5521974626299&text&type=phone_number&app_absent=0"><i class="fas fa-bus"></i> Start - Vale Transporte</a>
+  </div>
+</div>
+
+
+</div>
+
+
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main>
+    <div class="container">
+      <div class="row">
+
+        <!-- MV SOUL -->
+        <div class="acesso-bloco">
+          <a href="http://2030prd2.cloudmv.com.br/mvautenticador-cas/login?service=http%3A%2F%2F2030prd2.cloudmv.com.br%3A80%2Fsoul-mv%2Fcas" target="_blank">
+            <img src="assets/imagens/mvsoul.jpg" alt="MV SOUL" />
+            <div><strong>MV SOUL</strong></div>
+            <span class="tooltip-text">GESTÃO HOSPITALAR INTEGRADA</span>
+          </a>
+        </div>
+
+        <!-- MV PEP -->
+        <div class="acesso-bloco">
+          <a href="http://2030prd2.cloudmv.com.br/mvautenticador-cas/login?service=http%3A%2F%2F2030prd2pep.cloudmv.com.br%3A80%2Fmvpep%2F" target="_blank">
+            <img src="assets/imagens/mvpep.jpg" alt="MV PEP" />
+            <div><strong>MV PEP</strong></div>
+            <span class="tooltip-text">PRONTUÁRIO ELETRÔNICO DO PACIENTE</span>
+          </a>
+        </div>
+
+        <!-- MV SACR -->
+        <div class="acesso-bloco">
+          <a href="http://2030prd2.cloudmv.com.br/mvautenticador-cas//login?service=http%3A%2F%2F2030prd2.cloudmv.com.br%3A80%2F%2Fmvsacr%2Fcas" target="_blank">
+            <img src="assets/imagens/mvsacr.jpg" alt="MV SACR" />
+            <div><strong>MV SACR</strong></div>
+            <span class="tooltip-text">TRIAGEM E CLASSIFICAÇÃO DE RISCO</span>
+          </a>
+        </div>
+
+        <!-- MV PORTARIA -->
+        <div class="acesso-bloco">
+          <a href="http://2030prd2apoio.cloudmv.com.br/mvportaria/" target="_blank">
+            <img src="assets/imagens/mvportaria.jpg" alt="MV PORTARIA" />
+            <div><strong>MV PORTARIA</strong></div>
+            <span class="tooltip-text">REGISTRO E CONTROLE DE ACESSOS</span>
+          </a>
+        </div>
+
+        <!-- VIVACE CONNECT -->
+        <div class="acesso-bloco">
+          <a href="http://192.168.0.57:5555/entrySignIn" target="_blank">
+            <img src="assets/imagens/vivace.jpg" alt="VIVACE CONNECT" />
+            <div><strong>VIVACE CONNECT</strong></div>
+            <span class="tooltip-text">SISTEMA INTEGRADO PARA CONSULTA DE EXAMES</span>
+          </a>
+        </div>
+
+        <!-- GESTOR -->
+        <div class="acesso-bloco">
+          <a href="http://2030prd2apoio.cloudmv.com.br/mvgestorfluxo/" target="_blank">
+            <img src="assets/imagens/gestor.jpg" alt="GESTOR" />
+            <div><strong>GESTOR DE FLUXO</strong></div>
+            <span class="tooltip-text">SISTEMA DE ANÁLISE DE FLUXO</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- RODAPÉ -->
+
+ <footer class="footer-unificado">
+  <div class="footer-container">
+
+    <!-- LADO ESQUERDO -->
+    <div class="footer-left">
+      <img src="assets/imagens/Logo-HC.png" alt="Logo Hospital" />
+      <div class="footer-info">
+        <div class="slogan">Acolher é nosso jeito de cuidar</div>
+        <div class="redes-sociais">
+          <a href="https://www.instagram.com/redehospitalcasa/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/redehospitalcasa/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.facebook.com/hcrjbr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.youtube.com/channel/UCFAF2qMRFfumlU5ErVbv43Q" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.redehospitalcasa.com.br/" target="_blank"><i class="fas fa-globe"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LADO DIREITO -->
+    <div class="footer-right">
+      <div class="bloco-centro">
+        <div class="footer-linha1">
+          
+           Intranet Desenvolvido pelo Setor de TI
+          
+        </div>
+
+        <div class="footer-linha2">
+          <span class="titulo-suporte">Precisa de Suporte? Fale Conosco:</span>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/5521973023310" target="_blank" class="icone-suporte">
+            <i class="fab fa-whatsapp"></i>
+            <span class="tooltip-top">Enviar uma mensagem</span>
+          </a>
+
+          <!-- Ramal -->
+          <div class="icone-suporte ramal-tooltip">
+            <i class="fas fa-headset"></i>
+            <span class="tooltip-top">Ramal: 7030</span>
+          </div>
+
+          <!-- E-mail -->
+          <a href="mailto:info@hospitalcasasantacruz.com.br" class="icone-suporte">
+            <i class="fas fa-envelope"></i>
+            <span class="tooltip-top">info@hospitalcasasantacruz.com.br</span>
+          </a>
+
+          <!-- Chamado TI -->
+          <a href="https://glpi.redehospitalcasa.com.br/front/central.php" target="_blank" class="icone-suporte">
+            <i class="fas fa-desktop"></i>
+            <span class="tooltip-top">Abrir um chamado para a TI</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+</body>
+</html>
